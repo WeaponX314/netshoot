@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN /tmp/fetch_binaries.sh
 
-FROM alpine:3.17.3
+FROM alpine:3.18.0
 
 RUN set -ex \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
@@ -84,6 +84,9 @@ COPY --from=fetcher /tmp/termshark /usr/local/bin/termshark
 
 # Installing grpcurl
 COPY --from=fetcher /tmp/grpcurl /usr/local/bin/grpcurl
+
+# Installing fortio
+COPY --from=fetcher /tmp/fortio /usr/local/bin/fortio
 
 # Setting User and Home
 USER root
